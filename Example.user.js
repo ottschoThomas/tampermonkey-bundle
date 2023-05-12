@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub Shopware - Copy extends path
 // @namespace    ott
-// @version      4
+// @version      5
 // @description  Add btn to copy path for template extension
 // @author       Thomas Lesinski
 // @include      https://www.google.de*
