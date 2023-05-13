@@ -7,7 +7,7 @@
 // @match        https://github.com/ottschoIT?view_as=member*
 // @icon         https://www.google.com/s2/favicons?domain=ottscho-it-service.de
 // @grant        none
-// @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Ottscho-IT-org-page.js
-// @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Ottscho-IT-org-page.js
+// @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Ottscho-IT-org-page.user.js
+// @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Ottscho-IT-org-page.user.js
 // ==/UserScript==
 !function(){"use strict";document.querySelector("#your-repos-filter").focus()}();
