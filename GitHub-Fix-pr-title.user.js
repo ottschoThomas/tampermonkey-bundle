@@ -5,6 +5,7 @@
 // @description  Add button to fix pr title
 // @author       Thomas Lesinski
 // @include      https://github.com/*
+// @icon         https://www.google.com/s2/favicons?domain=ottscho-it-service.de
 // @grant        none
 // @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Fix-pr-title.js
 // @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Fix-pr-title.js

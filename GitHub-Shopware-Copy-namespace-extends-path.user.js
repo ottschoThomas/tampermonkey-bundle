@@ -6,6 +6,7 @@
 // @author       Thomas Lesinski
 // @include      https://github.com/shopware/platform*
 // @include      https://github.com/shopware/shopware*
+// @icon         https://www.google.com/s2/favicons?domain=ottscho-it-service.de
 // @grant        none
 // @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Shopware-Copy-namespace-extends-path.js
 // @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Shopware-Copy-namespace-extends-path.js
