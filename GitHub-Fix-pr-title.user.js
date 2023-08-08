@@ -6,6 +6,7 @@
 // @author       Thomas Lesinski
 // @include      https://github.com/*
 // @grant        none
+// @icon         https://www.google.com/s2/favicons?domain=ottscho-it-service.de
 // @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Fix-pr-title.user.js
 // @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Fix-pr-title.user.js
 // ==/UserScript==

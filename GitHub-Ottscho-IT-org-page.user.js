@@ -7,6 +7,7 @@
 // @match        https://github.com/ottschoIT?view_as=member*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=github.com
 // @grant        none
+// @icon         https://www.google.com/s2/favicons?domain=ottscho-it-service.de
 // @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Ottscho-IT-org-page.user.js
 // @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Ottscho-IT-org-page.user.js
 // ==/UserScript==
