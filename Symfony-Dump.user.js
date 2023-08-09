@@ -4,9 +4,11 @@
 // @version      1
 // @description  Symfony Dump
 // @author       Thomas Lesinski
-// @match        *
+// @include      *://*/*
+// @include      localhost
 // @grant        none
 // @icon         https://www.google.com/s2/favicons?domain=ottscho-it-service.de
+// @noframes
 // @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/Symfony-Dump.user.js
 // @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/Symfony-Dump.user.js
 // ==/UserScript==
