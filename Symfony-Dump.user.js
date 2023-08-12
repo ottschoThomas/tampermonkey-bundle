@@ -2,7 +2,7 @@
 // @name         Symfony Dump
 // @namespace    ott
 // @version      1
-// @description  Symfony Dump
+// @description  Hover a symfony dump and press ctrl + altleft + o to open it in fullscreen
 // @author       Thomas Lesinski
 // @include      *://*/*
 // @include      localhost
