@@ -12,7 +12,7 @@
 // ==/UserScript==
 !function(){"use strict";
     // Excluded tickets (e.g. internal tickets)
-    const e= [
+    const e = [
         'SUP-10613',
     ];
 
