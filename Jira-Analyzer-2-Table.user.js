@@ -16,5 +16,5 @@
         'SUP-10613',
     ];
 
-    document.querySelector("#content").style.padding="20px",document.querySelector("table").scrollIntoView();const t=document.createElement("div");t.classList.add("mt-3");let n="<div>Zuletzt:</div><ul>";const l=[];document.querySelectorAll("table tr:not(:first-of-type) td:first-of-type").forEach((t=>{const n=t.innerHTML.trim(),r=t.nextElementSibling.innerHTML.trim();e.includes(n)||"Summe"!==n&&"Gesamtsumme"!==n&&l.push({key:n,name:r})}));let r="Zuletzt:\n";l.forEach((e=>{r+=e+"\n",n+=`<li>${e.key} ${e.name}</li>`})),n+="</ul><br><div>Aktuell:</div><br>",t.innerHTML=n;const i=document.querySelector("table");i.parentNode.insertBefore(t,i.nextSibling)
-}();
+    document.querySelector("#content").style.padding="20px",document.querySelector("table").scrollIntoView();const t=document.createElement("div");t.classList.add("mt-3");let n="<div>Zuletzt:</div><ul>";const l=[];document.querySelectorAll("table tr:not(:first-of-type) td:first-of-type").forEach((t=>{const n=t.innerHTML.trim(),i=t.nextElementSibling.innerHTML.trim(),r=t?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.innerHTML?.trim();e.includes(n)||"Summe"!==n&&"Gesamtsumme"!==n&&l.push({key:n,label:r,name:i})}));let i="Zuletzt:\n";l.forEach((e=>{i+=e+"\n",n+=`<li>${e.key} ${e.label} ${e.name}</li>`})),n+="</ul><br><div>Aktuell:</div><br>",t.innerHTML=n;const r=document.querySelector("table");r.parentNode.insertBefore(t,r.nextSibling)}
+();
