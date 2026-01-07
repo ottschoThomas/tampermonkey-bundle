@@ -7,6 +7,8 @@
 // @match        http://localhost/*
 // @icon         https://www.google.com/s2/favicons?domain=ottscho-it-service.de
 // @grant        none
+// @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/Admin-Extension-Auto-Updater.user.js
+// @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/Admin-Extension-Auto-Updater.user.js
 // ==/UserScript==
 
 (function() {
