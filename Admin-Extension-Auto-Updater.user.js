@@ -7,8 +7,6 @@
 // @match        http://localhost/*
 // @icon         https://www.google.com/s2/favicons?domain=ottscho-it-service.de
 // @grant        none
-// @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/Admin-Extension-Auto-Updater.user.js
-// @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/Admin-Extension-Auto-Updater.user.js
 // ==/UserScript==
 
 (function() {
@@ -38,7 +36,13 @@
                     const card = anchor.closest('.sw-extension-card-base');
                     const extensionName = card.querySelector('.sw-extension-card-base__info-name').innerText;
                     const extensionVersion = card.querySelector('.sw-extension-card-base__meta-info-version').innerText;
-                    const extensionIsActive = card.querySelector('.sw-field--switch__input input').checked;
+
+                    let switchInput = card.querySelector('.sw-field--switch__input input');
+                    if (!switchInput) {
+                        switchInput = card.querySelector('.mt-switch input');
+                    }
+
+                    const extensionIsActive = switchInput.checked;
 
                     if (
                         ['aktualisierung', 'update'].includes(anchor.innerText.toLowerCase())
