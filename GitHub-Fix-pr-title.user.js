@@ -10,4 +10,28 @@
 // @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Fix-pr-title.user.js
 // @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/GitHub-Fix-pr-title.user.js
 // ==/UserScript==
-!function(){"use strict";setInterval((()=>{const e=document.querySelector(".discussion-topic-header");if(!document.querySelector(".btn-fix-pr-title")&&e){const t=document.querySelector("#pull_request_title");t.parentElement.style.flexGrow="1";const n=document.createElement("div");n.classList.add("btn","btn-fix-pr-title"),n.innerHTML="Fix",n.addEventListener("click",(()=>{const e=t.value.trim().split(" ");t.value=`[${e[0].toUpperCase()}-${e[1]}] ${e.slice(2,e.length).join(" ")}`})),e.classList.add("d-flex"),e.append(n)}}),250)}();
+
+(function() {
+    'use strict';
+
+    const interval = setInterval(() => {
+        const anchorEl = document.querySelector('.discussion-topic-header');
+
+        if (!document.querySelector('.btn-fix-pr-title') && anchorEl) {
+            const prTitleInput = document.querySelector('[name="pull_request[title]"]');
+            prTitleInput.parentElement.style.flexGrow = '1';
+
+            const btnFixPrTitle = document.createElement('div');
+            btnFixPrTitle.classList.add('btn', 'btn-fix-pr-title');
+            btnFixPrTitle.innerHTML = 'Fix';
+
+            btnFixPrTitle.addEventListener('click', () => {
+                const prTitleText = prTitleInput.value.trim();
+                const prTitleTextSplit = prTitleText.split(' ');
+                prTitleInput.value = `[${prTitleTextSplit[0].toUpperCase()}-${prTitleTextSplit[1]}] ${prTitleTextSplit.slice(2, prTitleTextSplit.length).join(' ')}`;
+            });
+
+            prTitleInput.parentElement.insertAdjacentElement('afterend', btnFixPrTitle);
+        }
+    }, 250);
+})();
