@@ -10,19 +10,57 @@
 // @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/Jira-Analyzer-2-Table.user.js
 // @grant        none
 // ==/UserScript==
-!function(){"use strict";
+
+(function() {
+    'use strict';
+
     // Excluded tickets (e.g. internal tickets)
-    const e=[
-        "SUP-10613",
-        "SUP-13472",
-        "SUP-13473",
-        "SUP-6295",
-        "SUP-4017",
-        "SUP-26320",
-        "SUP-6367",
-        "SUP-22815",
-        "SUP-28781"
+    const excludedKeys = [
+        'SUP-10613',
+        'SUP-13472',
+        'SUP-13473',
+        'SUP-6295',
+        'SUP-4017',
+        'SUP-26320',
+        'SUP-6367',
+        'SUP-22815',
+        'SUP-28781',
     ];
 
-    document.querySelector("#content").style.padding="20px",document.querySelector("table").scrollIntoView();const t=document.createElement("div");t.classList.add("mt-3");let n="<div>Zuletzt:</div><ul>";const l=[];document.querySelectorAll("table tr:not(:first-of-type)").forEach((t=>{const n=t.querySelector("td:nth-child(1)")?.innerHTML.trim(),r=t.querySelector("td:nth-child(2)")?.innerHTML.trim(),c=t.querySelector("td:nth-child(8)")?.innerHTML.trim(),i=t.querySelector("td:nth-child(9)")?.innerHTML.trim();e.includes(n)||"Summe"!==n&&"Gesamtsumme"!==n&&l.push({key:n,label:c,name:r,comment:i})}));let r="Zuletzt:\n";l.forEach((e=>{r+=e+"\n",n+=`<li>${e.key} ${e.label} ${e.name}</li>`,""!==e.comment&&(n+=`<ul><li>${e.comment}</li></ul>`)})),n+="</ul><br><div>Aktuell:</div><br>",t.innerHTML=n;const c=document.querySelector("table");c.parentNode.insertBefore(t,c.nextSibling)
-}();
+    document.querySelector('#content').style.padding = '20px';
+    document.querySelector('table').scrollIntoView();
+
+    const container = document.createElement('div');
+    container.classList.add('mt-3');
+
+    let containerContent = '<div>Zuletzt:</div><ul>';
+
+    const items = [];
+    document.querySelectorAll('table tr:not(:first-of-type)').forEach(row => {
+        const key = row.querySelector('td:nth-child(1)')?.innerHTML.trim();
+        const name = row.querySelector('td:nth-child(2)')?.innerHTML.trim();
+        const label = row.querySelector('td:nth-child(8)')?.innerHTML.trim();
+        const comment = row.querySelector('td:nth-child(9)')?.innerHTML.trim();
+
+        if (!excludedKeys.includes(key)) {
+            'Summe' !== key && 'Gesamtsumme' !== key && items.push({ key, label, name, comment });
+        }
+    });
+
+    let result = 'Zuletzt:\n';
+
+    items.forEach(item => {
+        result += item + '\n';
+        containerContent += `<li>${item.key} ${item.label} ${item.name}</li>`;
+
+        if ('' !== item.comment) {
+            containerContent += `<ul><li>${item.comment}</li></ul>`;
+        }
+    });
+
+    containerContent += '</ul><br><div>Aktuell:</div><br>';
+    container.innerHTML = containerContent;
+
+    const resultTable = document.querySelector('table');
+    resultTable.parentNode.insertBefore(container, resultTable.nextSibling);
+})();

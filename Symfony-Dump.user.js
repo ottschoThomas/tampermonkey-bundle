@@ -12,4 +12,179 @@
 // @downloadURL  https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/Symfony-Dump.user.js
 // @updateURL    https://github.com/ottschoThomas/tampermonkey-bundle/raw/main/Symfony-Dump.user.js
 // ==/UserScript==
-!function(t){"use strict";t.OttSymfonyDump=new class{init(){void 0!==t.PluginManager&&void 0!==t.Sfdump&&(this.createStyle(),this.handleKeyboard())}createStyle(){document.body.insertAdjacentHTML("beforeend","<style>\n                    #ott-symfony-dump {\n                        padding-right: 3rem;\n                    }\n\n                    .ott-symfony-dump-modal {\n                        background: #18171b;\n                        bottom: 0;\n                        left: 0;\n                        overflow-y: scroll;\n                        position: fixed;\n                        right: 0;\n                        top: 0;\n                        z-index: 2147483647;\n                    }\n                    \n                    .ott-symfony-dump-modal .sf-dump {\n                        margin: 0;\n                    }\n                    \n                    .ott-symfony-dump-modal .sf-dump-search-wrapper {\n                        padding-left: 75%;\n                        padding-right: 4rem;\n                    }\n                    \n                    .ott-symfony-dump-modal-content {\n                        position: relative;\n                    }\n                    \n                    .ott-symfony-dump-modal-close {\n                        cursor: pointer;\n                        font-size: 30px;\n                        position: fixed;\n                        right: 22px;\n                        top: 0;\n                        z-index: 2147483647;\n                    }\n                    \n                    .ott-symfony-dump-trigger {\n                        height: 30px;\n                        line-height: 20px;\n                    }\n                </style>")}handleKeyboard(){this.keyStates={controlleft:!1,altleft:!1,keyo:!1},document.addEventListener("keydown",(t=>{const e=t?.code?.toLowerCase();if(!(e in this.keyStates))return;this.keyStates[e]=!0;let n=!0;for(const t in this.keyStates)if(!1===this.keyStates[t]){n=!1;break}n&&(this.openDumpAtCursor(),Object.keys(this.keyStates).forEach((t=>this.keyStates[t]=!1)))})),document.addEventListener("keyup",(t=>{const e=t?.code?.toLowerCase();e in this.keyStates&&(this.keyStates[e]=!1)}))}openDumpAtCursor(){const t=Array.from(document.querySelectorAll(":hover"));if(!t.length)return;const e=t[t.length-1];let n=e;null===n.closest(".ott-symfony-dump-modal")&&(Array.from(e.classList).includes("sf-dump")||(n=e.closest(".sf-dump")),null!==n&&this.openDump(n))}createModal(){document.querySelector(".ott-symfony-dump-modal")?.remove(),this.modal=document.createElement("div"),this.modal.classList.add("ott-symfony-dump-modal"),this.modalContentWrapper=document.createElement("div"),this.modalContentWrapper.classList.add("ott-symfony-dump-modal-content"),this.modal.appendChild(this.modalContentWrapper),this.modalCloseButton=document.createElement("div"),this.modalCloseButton.classList.add("ott-symfony-dump-modal-close"),this.modalCloseButton.innerHTML="❌",this.modalCloseButton.addEventListener("click",this.hideModal.bind(this)),this.modal.appendChild(this.modalCloseButton),document.body.appendChild(this.modal)}openDump(e){(e=e.cloneNode(!0)).id="ott-symfony-dump",e.querySelectorAll("span").forEach((t=>{"▼"!==t.innerHTML&&"▶"!==t.innerHTML||t.remove()})),document.body.classList.add("overflow-hidden"),this.createModal(),this.modalContentWrapper.innerHTML="",this.modalContentWrapper.appendChild(e),t.Sfdump("ott-symfony-dump")}hideModal(){document.body.classList.remove("overflow-hidden"),this.modal.style.display="none"}},t.OttSymfonyDump.init()}(window);
+
+(function(window) {
+    'use strict';
+
+    class OttSymfonyDump {
+        init () {
+            if ('undefined' === typeof window.PluginManager || 'undefined' === typeof window.Sfdump) {
+                return;
+            }
+
+            this.createStyle();
+            this.handleKeyboard();
+        }
+
+        createStyle() {
+            document.body.insertAdjacentHTML(
+                'beforeend',
+                `<style>
+                    #ott-symfony-dump {
+                        padding-right: 3rem;
+                    }
+
+                    .ott-symfony-dump-modal {
+                        background: #18171b;
+                        bottom: 0;
+                        left: 0;
+                        overflow-y: scroll;
+                        position: fixed;
+                        right: 0;
+                        top: 0;
+                        z-index: 2147483647;
+                    }
+                    
+                    .ott-symfony-dump-modal .sf-dump {
+                        margin: 0;
+                    }
+                    
+                    .ott-symfony-dump-modal .sf-dump-search-wrapper {
+                        padding-left: 75%;
+                        padding-right: 4rem;
+                    }
+                    
+                    .ott-symfony-dump-modal-content {
+                        position: relative;
+                    }
+                    
+                    .ott-symfony-dump-modal-close {
+                        cursor: pointer;
+                        font-size: 30px;
+                        position: fixed;
+                        right: 22px;
+                        top: 0;
+                        z-index: 2147483647;
+                    }
+                    
+                    .ott-symfony-dump-trigger {
+                        height: 30px;
+                        line-height: 20px;
+                    }
+                </style>`
+            );
+        }
+
+        handleKeyboard() {
+            this.keyStates = {
+                controlleft: false,
+                altleft: false,
+                keyo: false,
+            };
+
+            document.addEventListener('keydown', event => {
+                const eventCode = event?.code?.toLowerCase();
+
+                if (!(eventCode in this.keyStates)) {
+                    return;
+                }
+
+                this.keyStates[eventCode] = true;
+                let shouldOpenDump = true;
+
+                for (const keyCode in this.keyStates) {
+                    if (false === this.keyStates[keyCode]) {
+                        shouldOpenDump = false;
+
+                        break;
+                    }
+                }
+
+                if (shouldOpenDump) {
+                    this.openDumpAtCursor();
+
+                    Object.keys(this.keyStates).forEach(keyCode => this.keyStates[keyCode] = false);
+                }
+            });
+
+            document.addEventListener('keyup', event => {
+                const eventCode = event?.code?.toLowerCase();
+
+                if (eventCode in this.keyStates) {
+                    this.keyStates[eventCode] = false;
+                }
+            });
+        }
+
+        openDumpAtCursor() {
+            const allHoveredElements = Array.from(document.querySelectorAll(':hover'));
+
+            if (!allHoveredElements.length) {
+                return;
+            }
+
+            const hoveredElement = allHoveredElements[allHoveredElements.length - 1];
+            let dump = hoveredElement;
+
+            if (null !== dump.closest('.ott-symfony-dump-modal')) {
+                return;
+            }
+
+            if (!Array.from(hoveredElement.classList).includes('sf-dump')) {
+                dump = hoveredElement.closest('.sf-dump');
+            }
+
+            if (null === dump) {
+                return;
+            }
+
+            this.openDump(dump);
+        }
+
+        createModal() {
+            document.querySelector('.ott-symfony-dump-modal')?.remove();
+
+            this.modal = document.createElement('div');
+            this.modal.classList.add('ott-symfony-dump-modal');
+
+            this.modalContentWrapper = document.createElement('div');
+            this.modalContentWrapper.classList.add('ott-symfony-dump-modal-content');
+            this.modal.appendChild(this.modalContentWrapper);
+
+            this.modalCloseButton = document.createElement('div');
+            this.modalCloseButton.classList.add('ott-symfony-dump-modal-close');
+            this.modalCloseButton.innerHTML = '❌';
+            this.modalCloseButton.addEventListener('click', this.hideModal.bind(this));
+            this.modal.appendChild(this.modalCloseButton);
+
+            document.body.appendChild(this.modal);
+        }
+
+        openDump(dump) {
+            dump = dump.cloneNode(true);
+            dump.id = 'ott-symfony-dump';
+
+            dump.querySelectorAll('span').forEach(span => {
+                if ('▼' === span.innerHTML || '▶' === span.innerHTML) {
+                    span.remove();
+                }
+            });
+
+            document.body.classList.add('overflow-hidden');
+
+            this.createModal();
+            this.modalContentWrapper.innerHTML = '';
+            this.modalContentWrapper.appendChild(dump);
+
+            window.Sfdump('ott-symfony-dump');
+        }
+
+        hideModal() {
+            document.body.classList.remove('overflow-hidden');
+            this.modal.style.display = 'none';
+        }
+    }
+
+    window.OttSymfonyDump = new OttSymfonyDump();
+    window.OttSymfonyDump.init();
+})(window);
