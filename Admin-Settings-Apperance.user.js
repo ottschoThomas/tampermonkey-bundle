@@ -168,6 +168,22 @@
         }
     }
 
+    function applyFroshAdminerStyle() {
+        const froshAdminerElement = document.querySelector('#frosh-adminer');
+
+        if (!froshAdminerElement) {
+            return;
+        }
+
+        const settingsItem = froshAdminerElement.closest('.sw-settings-item');
+
+        if (!settingsItem) {
+            return;
+        }
+
+        settingsItem.style.background = '#95c4e7';
+    }
+
     function applyFallbackElements(gridElement) {
         let fallbackIndex = 0;
 
@@ -203,6 +219,8 @@
         addHoverStyles();
 
         if (String(appearance) === gridElement.dataset.ottAppearanceApplied) {
+            applyFroshAdminerStyle();
+
             return true;
         }
 
@@ -217,6 +235,7 @@
         });
 
         applyFallbackElements(gridElement);
+        applyFroshAdminerStyle();
 
         if (2 === appearance) {
             gridElement.style.display = 'flex';
