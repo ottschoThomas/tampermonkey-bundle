@@ -26,12 +26,16 @@
         );
     };
 
-    const referencedIdInput = document.querySelector(
-        '#productDetailPageBuyProductForm input[name$="[referencedId]"]'
-    );
+    let activeRouteParameters = {};
 
-    if (referencedIdInput) {
-        window.referencedId = referencedIdInput.value;
+    try {
+        activeRouteParameters = JSON.parse(window.activeRouteParameters || '{}');
+    } catch (error) {
+        console.warn('Could not parse activeRouteParameters:', window.activeRouteParameters);
+    }
+
+    if (activeRouteParameters.productId) {
+        window.referencedId = activeRouteParameters.productId;
         window.referencedIdUrl = `${window.location.origin}/admin#/sw/product/detail/${window.referencedId}/base`;
 
         logValue('Referenced product id', window.referencedId);
@@ -39,14 +43,6 @@
     }
 
     if (window.activeRoute === 'frontend.landing.page') {
-        let activeRouteParameters = {};
-
-        try {
-            activeRouteParameters = JSON.parse(window.activeRouteParameters || '{}');
-        } catch (error) {
-            console.warn('Could not parse activeRouteParameters:', window.activeRouteParameters);
-        }
-
         if (activeRouteParameters.landingPageId) {
             window.activeLandingpageId = activeRouteParameters.landingPageId;
             window.activeLandingpageUrl = `${window.location.origin}/admin#/sw/category/landingPage/${window.activeLandingpageId}/base`;
