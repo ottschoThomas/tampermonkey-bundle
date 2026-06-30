@@ -34,12 +34,20 @@
         console.warn('Could not parse activeRouteParameters:', window.activeRouteParameters);
     }
 
-    if (activeRouteParameters.productId) {
-        window.referencedId = activeRouteParameters.productId;
+    const referencedIdInput = document.querySelector(
+        '#productDetailPageBuyProductForm input[name$="[referencedId]"]'
+    );
+
+    const productId = referencedIdInput
+        ? referencedIdInput.value
+        : activeRouteParameters.productId;
+
+    if (productId) {
+        window.referencedId = productId;
         window.referencedIdUrl = `${window.location.origin}/admin#/sw/product/detail/${window.referencedId}/base`;
 
-        logValue('Referenced product id', window.referencedId);
-        logValue('Referenced product url', window.referencedIdUrl);
+        logValue('Product id', window.referencedId);
+        logValue('Product url', window.referencedIdUrl);
     }
 
     if (window.activeRoute === 'frontend.landing.page') {
@@ -47,8 +55,8 @@
             window.activeLandingpageId = activeRouteParameters.landingPageId;
             window.activeLandingpageUrl = `${window.location.origin}/admin#/sw/category/landingPage/${window.activeLandingpageId}/base`;
 
-            logValue('Active landingpage id', window.activeLandingpageId);
-            logValue('Active landingpage url', window.activeLandingpageUrl);
+            logValue('Landingpage id', window.activeLandingpageId);
+            logValue('Landingpage url', window.activeLandingpageUrl);
         }
 
         return;
@@ -57,7 +65,7 @@
     if (window.activeNavigationId) {
         window.activeNavigationUrl = `${window.location.origin}/admin#/sw/category/index/${window.activeNavigationId}/base`;
 
-        logValue('Active navigation id', window.activeNavigationId);
-        logValue('Active navigation url', window.activeNavigationUrl);
+        logValue('Navigation id', window.activeNavigationId);
+        logValue('Navigation url', window.activeNavigationUrl);
     }
 })();
